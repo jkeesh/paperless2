@@ -1,4 +1,9 @@
-<?php	
+<?php
+	/*
+	 * Constants
+	 */
+	require_once('config.php');
+	
 	/*
 	 * Third-party libraries
 	 */
@@ -14,6 +19,19 @@
 	class ToroHandler {
 		protected $smarty;
 		
+		/*
+		 * This method handles all the basic setup that we want in all of the pages.
+		 * This includes, setting up the course, the role, and role string.
+		 */
+		public function basic_setup(){
+			$args = func_get_args();
+			$args = $args[0];
+		
+			// TODO fix this hardcoding
+			$this->smarty->assign("role", 2);	
+			$this->smarty->assign("role_string", "TA");		
+		}
+		
 		public function __construct() {
 			$this->smarty = new Smarty();
 			
@@ -21,6 +39,9 @@
 			$this->smarty->compile_dir  = BASE_DIR . '/views/templates_c/';
 			$this->smarty->config_dir   = BASE_DIR . '/views/configs/';
 			$this->smarty->cache_dir    = BASE_DIR . '/views/cache/';
+			
+			$this->smarty->assign("POSITION_TEACHING_ASSISTANT", POSITION_TEACHING_ASSISTANT);
+			$this->smarty->assign("POSITION_STUDENT", POSITION_STUDENT);
 		}
 		
 		function isValidDirectory($entry){

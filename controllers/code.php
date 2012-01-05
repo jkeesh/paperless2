@@ -13,6 +13,8 @@ class CodeHandler extends ToroHandler {
 	 */
 	public function get($qid, $class, $assignment, $student, $print=False) {
 		
+		$this->basic_setup(func_get_args());
+		
 		// TODO fix dirname here to be universal
 		$dirname = "repos/" . $assignment . "/" . $student . "/"; 
 		$all_files = Utilities::get_all_files($dirname);
@@ -23,6 +25,7 @@ class CodeHandler extends ToroHandler {
 		
 		//$this->smarty->assign("assignment", htmlentities($assignment));
 		//$this->smarty->assign("showComments", $showComments);
+		$this->smarty->assign("code_files", $code_files);
 		$this->smarty->display("code.html");
 	}
 
