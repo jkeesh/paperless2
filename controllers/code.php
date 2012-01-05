@@ -11,7 +11,7 @@ class CodeHandler extends ToroHandler {
 	 */
 	public function get($qid, $class, $assignment, $student, $print=False) {
 		
-		echo "CODE FILE";
+		print_r(func_get_args());
 		
 		
 		//$this->smarty->assign("assignment", htmlentities($assignment));
