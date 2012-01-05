@@ -52,6 +52,7 @@ class ToroApplication {
         break;
       }
       else if ($pattern_type == "regex") {
+
         if (preg_match('/' . $pattern . '/', $path_info, $matches)) {
           $discovered_handler = $handler_name;
           $regex_matches = $matches;

@@ -10,60 +10,12 @@ class CodeHandler extends ToroHandler {
 	 * Displays the syntax highlighted code for a student, assignment pair
 	 */
 	public function get($qid, $class, $assignment, $student, $print=False) {
-		$this->basic_setup(func_get_args());
-
-		$suid = explode("_", $student); // if it was student_1 just take student
-		if(count($suid) != 2){
-			return $this->display_error("The code directory was not well formed.");
-		}
-
-		$submission_number = $suid[1];
-		$suid = $suid[0];
-
-		$the_student = new Student;
-		$the_student->from_sunetid_and_course($suid, $this->course);
-
-		$the_sl = $the_student->get_section_leader();
-		if(is_null($the_sl)){
-			return $this->display_error("This student does not have a section leader.");
-		}
-
-		$dirname = $the_sl->get_base_directory() . "/". $assignment . "/" . $student . "/"; 
-		$all_files = Utilities::get_all_files($dirname);
-		if(is_null($all_files)){
-			return $this->display_error("This was not a valid directory.");
-		}
-
-		$code_files = Utilities::get_code_files($this->course, $the_student, $assignment, $dirname, $all_files, $submission_number);
-
-
-		$release = Utilities::release_exists($dirname);
-		$this->smarty->assign("release", $release);
-
-		$this->smarty->assign("code_files", $code_files);
-
-		$this->smarty->assign("the_student", $the_student);
-		$this->smarty->assign("the_sl", $the_sl);
-
-		// if the username is something other than the owner of these files, require
-		// it to be a SL
-		if($suid != USERNAME) {
-			Permissions::gate(POSITION_SECTION_LEADER, $this->role);	
-		}else{
-		// Otherwise require this student to be in the class
-			Permissions::gate(POSITION_STUDENT, $this->role);	
-		}
-
-		if($this->role >= POSITION_SECTION_LEADER){
-			$this->smarty->assign("interactive", 1);
-			$showComments = True;
-		}
-		if($this->role == POSITION_STUDENT){
-			$showComments = $release;
-		}
-
-		$this->smarty->assign("assignment", htmlentities($assignment));
-		$this->smarty->assign("showComments", $showComments);
+		
+		echo "CODE FILE";
+		
+		
+		//$this->smarty->assign("assignment", htmlentities($assignment));
+		//$this->smarty->assign("showComments", $showComments);
 		$this->smarty->display("code.html");
 	}
 

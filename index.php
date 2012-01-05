@@ -65,7 +65,7 @@
 		
 	/*
 	 * URL routes
-	 */
+	*/
 	$site = new ToroApplication(Array(
 									  Array($course_regex. 'student\/'.$sunet_regex.'\/?$', 'regex', 'StudentHandler'),
 									  Array($course_regex. 'code\/'.$assn_regex.'\/'.$sunet_regex.'(\/print)?$', 'regex', 'CodeHandler'),
@@ -76,4 +76,6 @@
 	
 	if(isset($_REQUEST['path']))
 	$_SERVER['PATH_INFO'] = $_REQUEST['path'];
+	
+	
 	$site->serve();
