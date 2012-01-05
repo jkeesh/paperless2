@@ -1,4 +1,6 @@
 <?php
+require_once("utils.php");
+
 class CodeHandler extends ToroHandler {
 
 	private function display_error($error){
@@ -11,12 +13,13 @@ class CodeHandler extends ToroHandler {
 	 */
 	public function get($qid, $class, $assignment, $student, $print=False) {
 		
-		$file_info = array();
-		
-		
-		$file_info[$file] = array('contents' => htmlentities(file_get_contents($dirname . $file)),
-								  'assn' => $assn);
-		
+		// TODO fix dirname here to be universal
+		$dirname = "repos/" . $assignment . "/" . $student . "/"; 
+		$all_files = Utilities::get_all_files($dirname);
+		if(is_null($all_files)){
+			return $this->display_error("This was not a valid directory.");
+		}
+		$code_files = Utilities::get_code_files($dirname, $all_files);
 		
 		//$this->smarty->assign("assignment", htmlentities($assignment));
 		//$this->smarty->assign("showComments", $showComments);
