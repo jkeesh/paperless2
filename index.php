@@ -10,8 +10,6 @@
 	require_once('lib/smarty/Smarty.class.php');
 	require_once('lib/toro.php');
 	
-	define('BASE_DIR', dirname(__FILE__));
-	
 	
 	/*
 	 * Each controller extends the following class.

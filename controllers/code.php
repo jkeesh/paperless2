@@ -10,13 +10,17 @@ class CodeHandler extends ToroHandler {
 
 	/*
 	 * Displays the syntax highlighted code for a student, assignment pair
+	 *
+	 *
+	 * Test URL: http://localhost:8888/paperless2/1122/cs107/code/assign1/econner
 	 */
 	public function get($qid, $class, $assignment, $student, $print=False) {
-		
 		$this->basic_setup(func_get_args());
 		
 		// TODO fix dirname here to be universal
-		$dirname = "repos/" . $assignment . "/" . $student . "/"; 
+		$dirname = SUBMISSION_BASE . "/". $class. "/". $class . "." . $qid . "/repos/" . $assignment . "/" . $student . "/"; 
+		echo $dirname;
+		
 		$all_files = Utilities::get_all_files($dirname);
 		if(is_null($all_files)){
 			return $this->display_error("This was not a valid directory.");
