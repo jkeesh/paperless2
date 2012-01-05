@@ -11,7 +11,11 @@ class CodeHandler extends ToroHandler {
 	 */
 	public function get($qid, $class, $assignment, $student, $print=False) {
 		
-		print_r(func_get_args());
+		$file_info = array();
+		
+		
+		$file_info[$file] = array('contents' => htmlentities(file_get_contents($dirname . $file)),
+								  'assn' => $assn);
 		
 		
 		//$this->smarty->assign("assignment", htmlentities($assignment));
