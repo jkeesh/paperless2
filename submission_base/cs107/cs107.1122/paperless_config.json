@@ -4,7 +4,12 @@
 	"assignments": [
 		{
 			"name": "The First Assignment",
-			"dir": "assign1"
+			"dir": "assign1",
+			"comments": [
+				"Forgot to free memory",
+				"Need better decomposition",
+				"Spacing is off"
+			]
 		},
 		{
 			"name": "The Second Assignment",
