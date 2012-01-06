@@ -1,7 +1,5 @@
 <?php
-	//This is a configuration file for running paperless locally
-	
-	print_r($_ENV);
+	//This is a configuration file for running paperless locally and on web	
 	if(array_key_exists('SERVER_NAME', $_ENV) && $_ENV['SERVER_NAME'] == "www.stanford.edu"){
 		define('LOCAL', false);
 	}else{
