@@ -47,6 +47,15 @@ class Utilities {
 		}
 		return $entries;
 	}
+	
+	public static function get_comments($dirname){
+		$file = $dirname . 'comments.json';
+		if(is_file($file)){
+			$contents = file_get_contents($file);
+			return json_decode($contents);
+		}
+		return array();
+	}
 
 
 	/*

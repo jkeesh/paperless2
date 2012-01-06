@@ -37,6 +37,8 @@
 			$this->smarty->compile_dir  = BASE_DIR . '/views/templates_c/';
 			$this->smarty->config_dir   = BASE_DIR . '/views/configs/';
 			$this->smarty->cache_dir    = BASE_DIR . '/views/cache/';
+
+			$this->smarty->assign("ROOT_URL", ROOT_URL);
 			
 			$this->smarty->assign("POSITION_TEACHING_ASSISTANT", POSITION_TEACHING_ASSISTANT);
 			$this->smarty->assign("POSITION_STUDENT", POSITION_STUDENT);

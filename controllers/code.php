@@ -17,54 +17,16 @@ class CodeHandler extends ToroHandler {
 		if($student != USERNAME){
 			Permissions::TA_GATE($qid, $class, USERNAME);
 		}
-		
-		$this->basic_setup(func_get_args());
-		
-		// TODO fix dirname here to be universal
-		$class_base = Utilities::get_class_base($qid, $class);
-		
-		$assignment_base = Utilities::get_assn_base($qid, $class, $assignment);
-		
 		$dirname = Utilities::get_student_dir($qid, $class, $assignment, $student);
-		echo $dirname;
-		
-		
-	// 	echo $class_base;
-		// echo $assignment_base;
-		//$dirname = SUBMISSION_BASE . "/". $class. "/". $class . "." . $qid . "/repos/" . $assignment . "/" . $student . "/"; 
-		//echo "<BR>";
-		echo $dirname;
-		
+		$comments = Utilities::get_comments($dirname);
+		print_r($comments);
 		$all_files = Utilities::get_all_files($dirname);
-		if(is_null($all_files)){
-			return $this->display_error("This was not a valid directory.");
-		}
 		$code_files = Utilities::get_code_files($dirname, $all_files);
-		
-		//$this->smarty->assign("assignment", htmlentities($assignment));
-		//$this->smarty->assign("showComments", $showComments);
+		$this->smarty->assign("comments", $comments);
 		$this->smarty->assign("code_files", $code_files);
 		$this->smarty->display("code.html");
 	}
 
-
-	private function json_failure($error){
-		echo json_encode(array("status" => "fail", "why" => $error));
-	}
-
-	private function json_success(){
-		echo json_encode(array("status" => "ok"));
-	}
-
-	private function handle_release($release_action, $dirname){
-		if($release_action == "create"){
-			Utilities::create_release($dirname);
-		}else{
-			Utilities::delete_release($dirname);
-		}
-		$this->json_success();
-		return;
-	}
 
 	/*
 	 * Handles adding and deleting comments.  Note: when a comment is edited it is

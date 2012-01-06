@@ -1,3 +1,31 @@
+<script type="text/javascript" src="{$ROOT_URL}/static/js/syntaxhighlighter/scripts/shCore.js?v"></script>
+<link type="text/css" rel="stylesheet" href="{$ROOT_URL}/static/js/syntaxhighlighter/styles/shCoreDefault.css" id="syntaxStylesheet" />
+<script type="text/javascript" src="{$ROOT_URL}/static/js/syntaxhighlighter/scripts/shBrushCpp.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+SyntaxHighlighter.all();
+
+$(function(){
+	Paperless.CONFIGURATION = {
+		
+	};
+});
+</script>
+
+{foreach from=$comments item=file key=filename}
+<div class="file_comments"
+	data-file="{$filename}">
+	{foreach from=$file item=comment key=range}
+<div class="comment"
+	data-range="{$range}"
+	data-commenter="{$comment->commenter}"
+	data-comment="{$comment->comment}"></div>
+	{/foreach}
+</div>
+{/foreach}
+
+
 {include file="codepage/code_filelist.html"}
 
 {include file="codepage/code_files.html"} 
