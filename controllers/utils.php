@@ -21,6 +21,25 @@ class Utilities {
 		return $assn_base . "/" . $student . "/";
 	}
 
+	/*
+	 * Better get directories. Ignore . and ..
+	 * Return names of subdirectories.
+	 */
+	public static function get_all_directories($dirname){
+		$entries = array();
+		if(!is_dir($dirname)) return $entries;
+		$dir = opendir($dirname);
+		while($entry = readdir($dir)) {
+			if($entry == '.' || $entry == ".."){
+				continue;
+			}
+			if(is_dir($dirname.'/'.$entry)){
+				$entries[] = $entry;
+			}
+		}
+		return $entries;
+	}
+
 
 	/*
 	 * This method returns all of the files in this submission folder for a student.

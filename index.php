@@ -74,6 +74,8 @@
 	require_once('controllers/assignment.php'); // lists the assignments for a given student
 	require_once('controllers/ta.php'); 		// lists the assignments for a ta
 	require_once('controllers/router.php'); 	// determine which url to go to
+	require_once('controllers/utils.php'); 	// determine which url to go to
+
 
 
 	// This regex represents the url for a course. It contains first

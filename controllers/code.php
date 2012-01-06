@@ -1,5 +1,4 @@
 <?php
-require_once("utils.php");
 
 class CodeHandler extends ToroHandler {
 
