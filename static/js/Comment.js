@@ -5,6 +5,17 @@ function Comment(options){
     this.file = options.file;
 }
 
-// Create a save function.
+/*
+ * This function should add a comment to the DOM
+ */
+Comment.prototype.add_to_dom = function(){
+    
+}
 
-// Create an add to dom function?
+/*
+ * This function is responsible for saving the comment when it changes.
+ * The changes to be saved should be the current contents of 'text'
+ */
+Comment.prototype.save = function(){
+    
+}
