@@ -12,4 +12,7 @@
 	
 	define('SUBMISSION_BASE', 'submission_base');
 //	define('SUBMISSION_BASE', '/afs/ir/class/archive/cs');	
+
+	define('ROOT_URL', 'http://localhost:8888/paperless2');
+
 ?>
