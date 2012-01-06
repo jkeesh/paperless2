@@ -7,7 +7,8 @@
 			
 			$class_dir = Utilities::get_class_base($qid, $class);
 			$assns = Utilities::get_all_directories($class_dir . "/repos");
-			
+
+			$this->smarty->assign("class", $class);			
 			$this->smarty->assign("assns", $assns);
 			$this->smarty->display("ta.html");			
 		}		
