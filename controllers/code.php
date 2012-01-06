@@ -14,6 +14,10 @@ class CodeHandler extends ToroHandler {
 	 * Test URL: http://localhost:8888/paperless2/1122/cs107/code/assign1/econner
 	 */
 	public function get($qid, $class, $assignment, $student, $print=False) {
+		if($student != USERNAME){
+			Permissions::TA_GATE($qid, $class, USERNAME);
+		}
+		
 		$this->basic_setup(func_get_args());
 		
 		// TODO fix dirname here to be universal

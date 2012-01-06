@@ -75,6 +75,7 @@
 	require_once('controllers/ta.php'); 		// lists the assignments for a ta
 	require_once('controllers/router.php'); 	// determine which url to go to
 	require_once('controllers/utils.php'); 	// determine which url to go to
+	require_once('controllers/permissions.php'); 	// determine which url to go to
 
 
 
@@ -92,7 +93,7 @@
 									  Array($course_regex. 'code\/'.$assn_regex.'\/'.$sunet_regex.'(\/print)?$', 'regex', 'CodeHandler'),
 									  Array($course_regex. 'assignment\/'.$assn_regex.'\/?$', 'regex', 'AssignmentHandler'),
 									  Array($course_regex. 'ta\/?$', 'regex', 'TAHandler'),
-									  Array($course_regex, 'regex', 'RouterHandler')
+									  Array($course_regex. '?$', 'regex', 'RouterHandler')
 									  ));
 	
 	if(isset($_REQUEST['path']))

@@ -3,6 +3,10 @@
 	class StudentHandler extends ToroHandler {
 			
 		public function get($qid, $class, $student) {
+			if($student != USERNAME){
+				Permissions::TA_GATE($qid, $class, USERNAME);
+			}
+			
 			$class_dir = Utilities::get_class_base($qid, $class);
 			$assns = Utilities::get_all_directories($class_dir . "/repos");
 			
