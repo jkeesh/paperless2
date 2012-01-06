@@ -20,6 +20,8 @@ Paperless.FileManager = {
  */
 Paperless.Setup = {
     
+    /// TODO ... maybe not the best way to set this up... files arent
+    /// created if there werent comments yet... maybe do this in two spearte setesp
     create_comments: function(){
         // For every file create a new CodeFile object
         $('.file_comments').each(function(idx, elem){
