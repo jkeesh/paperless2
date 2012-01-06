@@ -87,21 +87,23 @@ class Utilities {
 	 *
 	 * @param	$dirname	{string}	the full path to the submission
 	 * @param	$files		{array}		the list of all the acceptable files in the directory
+	 * @param	$config		{Object}	the configuration for the class
 	 *
 	 * @return 	{array}, an associative array mapping from the filename to an array of all of the file contents 
 	 *			and AssignmentFile objects for each valid code file.
 	 * @author	Jeremy Keeshin	December 25, 2011
-	 * @edited  Eric Conner  January 5, 2012
+	 * @edited  Eric Conner  	January 5, 2012
+	 * @edited	Jeremy Keeshin	January 6, 2012
+	 *							only valid code extensions
 	 */
-	public static function get_code_files($dirname, $files){
-		
+	public static function get_code_files($dirname, $files, $config){
 		$file_info = array();
-		
+		$valid_exts = $config->extension_whitelist;
 		foreach($files as $file){
-			//if($course->code_file_is_valid($file)){
-				
+			$ext = pathinfo($file, PATHINFO_EXTENSION);	
+			if(in_array($ext, $valid_exts)){
 				$file_info[$file] = array('contents' => htmlentities(file_get_contents($dirname . $file)));				
-			//}
+			}
 		}
 		return $file_info;
 	}

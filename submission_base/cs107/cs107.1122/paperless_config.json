@@ -1,6 +1,7 @@
 {
 	"class": "cs107",
 	"tas": ["econner", "jkeeshin"],
+	"extension_whitelist": ["h", "c"],
 	"assignments": [
 		{
 			"name": "The First Assignment",
