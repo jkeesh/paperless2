@@ -1,5 +1,26 @@
 <?php
 class Utilities {	
+	
+	/*
+	 * Get the class base dir, which is: 
+	 * SUBMISSION_BASE/cs107/cs107.1122
+	 */
+	public static function get_class_base($qid, $class){
+		$class_base = SUBMISSION_BASE . "/". $class. "/". $class . "." . $qid;
+		return $class_base;
+	}
+	
+	
+	public static function get_assn_base($qid, $class, $assn){
+		$class_base = Utilities::get_class_base($qid, $class);
+		return $class_base . "/repos/" . $assn;
+	}
+	
+	public static function get_student_dir($qid, $class, $assignment, $student){
+		$assn_base = Utilities::get_assn_base($qid, $class, $assignment);
+		return $assn_base . "/" . $student . "/";
+	}
+
 
 	/*
 	 * This method returns all of the files in this submission folder for a student.

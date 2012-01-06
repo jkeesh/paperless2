@@ -18,7 +18,18 @@ class CodeHandler extends ToroHandler {
 		$this->basic_setup(func_get_args());
 		
 		// TODO fix dirname here to be universal
-		$dirname = SUBMISSION_BASE . "/". $class. "/". $class . "." . $qid . "/repos/" . $assignment . "/" . $student . "/"; 
+		$class_base = Utilities::get_class_base($qid, $class);
+		
+		$assignment_base = Utilities::get_assn_base($qid, $class, $assignment);
+		
+		$dirname = Utilities::get_student_dir($qid, $class, $assignment, $student);
+		echo $dirname;
+		
+		
+	// 	echo $class_base;
+		// echo $assignment_base;
+		//$dirname = SUBMISSION_BASE . "/". $class. "/". $class . "." . $qid . "/repos/" . $assignment . "/" . $student . "/"; 
+		//echo "<BR>";
 		echo $dirname;
 		
 		$all_files = Utilities::get_all_files($dirname);

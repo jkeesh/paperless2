@@ -1,6 +1,7 @@
 <?php
 	class AssignmentHandler extends ToroHandler {	
-		public function get() {
+		public function get($qid, $class, $assn) {
+			
 			
 		}		
 	}
