@@ -8,9 +8,9 @@
 			echo $assn_dir;
 			echo "<BR>";
 			print_r($students);
-			$this->smarty->assign("students", $students);
-			$this->smarty->display("assignment.html");
 			
+			$this->smarty->assign("students", $students);
+			$this->smarty->display("assignment.html");			
 		}		
 	}
 ?>
