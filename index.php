@@ -91,7 +91,7 @@
 									  Array($course_regex. 'student\/'.$sunet_regex.'\/?$', 'regex', 'StudentHandler'),
 									  Array($course_regex. 'code\/'.$assn_regex.'\/'.$sunet_regex.'(\/print)?$', 'regex', 'CodeHandler'),
 									  Array($course_regex. 'assignment\/'.$assn_regex.'\/?$', 'regex', 'AssignmentHandler'),
-									  Array($course_regex. 'ta\/'.$sunet_regex.'\/?$', 'regex', 'TAHandler'),
+									  Array($course_regex. 'ta\/?$', 'regex', 'TAHandler'),
 									  Array('(.*)', 'regex', 'RouterHandler')
 									  ));
 	
