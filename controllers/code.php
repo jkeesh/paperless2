@@ -18,6 +18,8 @@ class CodeHandler extends ToroHandler {
 			Permissions::TA_GATE($qid, $class, USERNAME);
 		}
 		$dirname = Utilities::get_student_dir($qid, $class, $assignment, $student);
+		
+		// /cs107.1122/repos/assign2/jdoe/comments.json
 		$comments = Utilities::get_comments($dirname);
 		print_r($comments);
 		$all_files = Utilities::get_all_files($dirname);
