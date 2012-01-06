@@ -1,0 +1,18 @@
+{
+	"class": "cs107",
+	"tas": ["econner", "jkeeshin"],
+	"assignments": [
+		{
+			"name": "The First Assignment",
+			"dir": "assign1"
+		},
+		{
+			"name": "The Second Assignment",
+			"dir": "assign2"
+		},
+		{
+			"name": "The Third Assignment",
+			"dir": "assign3"
+		}
+	]
+}

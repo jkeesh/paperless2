@@ -92,7 +92,7 @@
 									  Array($course_regex. 'code\/'.$assn_regex.'\/'.$sunet_regex.'(\/print)?$', 'regex', 'CodeHandler'),
 									  Array($course_regex. 'assignment\/'.$assn_regex.'\/?$', 'regex', 'AssignmentHandler'),
 									  Array($course_regex. 'ta\/?$', 'regex', 'TAHandler'),
-									  Array('(.*)', 'regex', 'RouterHandler')
+									  Array($course_regex, 'regex', 'RouterHandler')
 									  ));
 	
 	if(isset($_REQUEST['path']))

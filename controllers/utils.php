@@ -10,6 +10,20 @@ class Utilities {
 		return $class_base;
 	}
 	
+	public static function get_configuration($qid, $class){
+		$class_base = Utilities::get_class_base($qid, $class);
+		$config_file = $class_base . "/paperless_config.json";
+		echo $config_file;
+		
+		
+		$contents = file_get_contents($config_file);
+		echo $contents;
+		echo "<BR>";
+		
+		$arr = json_decode($contents);
+		print_r($arr);
+	}
+	
 	
 	public static function get_assn_base($qid, $class, $assn){
 		$class_base = Utilities::get_class_base($qid, $class);
