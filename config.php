@@ -2,7 +2,7 @@
 	//This is a configuration file for running paperless locally
 
 	//This is the only thing you should change	
-	define('USERNAME', 'jdoe');
+	define('USERNAME', 'jkeeshin');
 	
 	define('BASE_DIR', dirname(__FILE__));
 	
