@@ -1,5 +1,8 @@
 <?php
 	//This is a configuration file for running paperless locally
+	
+	print_r($_ENV);
+//	if($_)
 
 	//This is the only thing you should change	
 	define('USERNAME', 'jkeeshin');
