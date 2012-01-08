@@ -22,12 +22,7 @@
 		 * This includes, setting up the course, the role, and role string.
 		 */
 		public function basic_setup(){
-			$args = func_get_args();
-			$args = $args[0];
-		
-			// TODO fix this hardcoding
-			$this->smarty->assign("role", 2);	
-			$this->smarty->assign("role_string", "TA");		
+			$this->smarty->assign("username", USERNAME);
 		}
 		
 		public function __construct() {

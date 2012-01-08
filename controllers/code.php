@@ -17,6 +17,7 @@ class CodeHandler extends ToroHandler {
 		if($student != USERNAME){
 			Permissions::TA_GATE($qid, $class, USERNAME);
 		}
+		$this->basic_setup();
 		$dirname = Utilities::get_student_dir($qid, $class, $assignment, $student);
 		
 		// /cs107.1122/repos/assign2/jdoe/comments.json
