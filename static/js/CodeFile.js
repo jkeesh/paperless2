@@ -3,6 +3,8 @@ function CodeFile(options){
     this.comments = []; // hold comment objects
     this.highlights = new Array(); // stores counts of times a line has been highlighted
     
+    this.current_dialog = null;
+    
     // add mouse events
     this.add_handlers();
 }
@@ -74,6 +76,22 @@ CodeFile.prototype.get_line_number = function(line) {
 	var pattern = /line number(\d+) .*/;
 	var result = pattern.exec(newline)[1];
 	return parseInt(result);
+}
+
+    
+/*
+ * remove_dialog
+ * --------------------
+ * This function removes a modal dialog from the view, but is
+ * safe because it checks the existence of a textarea on the 
+ * screen before removing
+ */
+CodeFile.prototype.remove_dialog = function() {
+    if( $('textarea')) $('textarea').remove();
+    if(this.current_dialog == null) return;
+	this.current_dialog.dialog("close");
+	this.current_dialog.dialog("destroy");
+	this.current_dialog = null;
 }
 
 CodeFile.mouse_pressed = function(event) {

@@ -27,9 +27,12 @@ Comment.prototype.add_to_dom = function() {
  */
 Comment.prototype.save = function(){
     var commentText = $("textarea").val();
-	commentText = this.filter(commentText);
+	this.text = this.filter(commentText);
 	
     this.add_to_dom();
+    if(Comment.is_editing()) {
+        this.file.remove_dialog();
+    }
     
     console.info("SAVE!");
 }
@@ -38,6 +41,10 @@ Comment.prototype.save = function(){
 * Delete the comment from persistent storage.
 */
 Comment.prototype.delete = function() {
+    if(Comment.is_editing()) {
+        this.file.remove_dialog();
+    }
+    
     console.info("DELETE!");
 }
 
@@ -71,6 +78,7 @@ Comment.prototype.edit = function() {
     		   "Delete":  function() { self.delete(); },
     		}
     });
+    this.file.current_dialog = current_dialog;
 
     $("textarea").focus();		
 }
