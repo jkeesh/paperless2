@@ -26,6 +26,20 @@ Comment.prototype.add_to_dom = function() {
 }
 
 /*
+ * Comment.prototype.remove_from_dom
+ * ------------------------
+ * Remove this comment from display.
+ *
+ * @author  Eric Conner  January 8, 2012
+ */
+Comment.prototype.remove_from_dom = function() {    
+    var comment_div = $('.inlineComment[data-range="' + this.range.to_string() + '"]',
+                            '.code_container[data-name="' + this.file.name+'"]');
+    if(comment_div.length > 0)
+        comment_div.remove();
+}
+
+/*
  * Comment.prototype.add_to_dom
  * ------------------------
  * Save the current comment to persistent storage.
@@ -69,6 +83,7 @@ Comment.prototype.delete = function() {
 Comment.prototype.edit = function() {
     var self = this;
     
+    this.remove_from_dom();
 	if(Comment.is_editing()) return;
 
     var range_last_line = this.file.get_line(this.range.higher).first();
