@@ -6,7 +6,11 @@ function Comment(options){
 }
 
 /*
- * This function should add a comment to the DOM
+ * Comment.prototype.add_to_dom
+ * ------------------------
+ * Add a comment from the template to display on the dom.
+ *
+ * @author  Eric Conner  January 8, 2012
  */
 Comment.prototype.add_to_dom = function() {
     var self = this;
@@ -22,8 +26,11 @@ Comment.prototype.add_to_dom = function() {
 }
 
 /*
- * This function is responsible for saving the comment when it changes.
- * The changes to be saved should be the current contents of 'text'
+ * Comment.prototype.add_to_dom
+ * ------------------------
+ * Save the current comment to persistent storage.
+ *
+ * @author  Eric Conner  January 8, 2012
  */
 Comment.prototype.save = function(){
     var commentText = $("textarea").val();
@@ -38,8 +45,12 @@ Comment.prototype.save = function(){
 }
 
 /*
-* Delete the comment from persistent storage.
-*/
+ * Comment.prototype.delete
+ * ------------------------
+ * Delete the comment from persistent storage.
+ *
+ * @author  Eric Conner  January 8, 2012
+ */
 Comment.prototype.delete = function() {
     if(Comment.is_editing()) {
         this.file.remove_dialog();
@@ -49,8 +60,12 @@ Comment.prototype.delete = function() {
 }
 
 /*
-* Open modal dialog for editing a comment.
-*/
+ * Comment.prototype.edit
+ * ------------------------
+ * Open modal dialog for editing this comment.
+ *
+ * @author  Eric Conner  January 8, 2012
+ */
 Comment.prototype.edit = function() {
     var self = this;
     
@@ -90,7 +105,7 @@ Comment.prototype.edit = function() {
 
 /*
  * Comment.prototype.filter
- * =====================
+ * ------------------------
  * Replace all of the text with ampersands and angle brackets with their
  * HTML entity equivalents.
  *
@@ -104,6 +119,16 @@ Comment.prototype.filter = function(text){
 	return text;
 }
 
+/*
+ * Comment.prototype.get_display_data
+ * ------------------------
+ * Get the data necessary to display this comment.
+ *
+ * @return   data    {Objcet}    An object with the necessary properties to display
+ *                               this comment.
+ *
+ * @author  Eric Conner  January 8, 2012
+ */
 Comment.prototype.get_display_data = function() {
     
     formatted_text = Paperless.CONFIGURATION.converter.makeHtml(this.text);	
@@ -119,6 +144,15 @@ Comment.prototype.get_display_data = function() {
     return data;
 }
 
+/*
+ * Comment.is_editing
+ * ------------------------
+ * Static method that determines whether a comment is currently being edited.
+ *
+ * @return {boolean}    True if a comment is currently being edited, false otherwise.
+ *
+ * @author  Eric Conner  January 8, 2012
+ */
 Comment.is_editing = function() {
     // assume that if there is a textarea on screen then
     // we are editing a comment
