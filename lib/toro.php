@@ -106,8 +106,9 @@ class ToroApplication {
       call_user_func_array(Array($handler_instance, $request_method), $method_arguments);
     }
     else {
-	  $this->smarty->assign('errorMsg', "Couldn't find handler for URL.");	
-	  $this->smarty->display("error.html");
+	  //$this->smarty->assign('errorMsg', "Couldn't find handler for URL.");	
+	  //$this->smarty->display("error.html");
+	  echo "Couldn't find handler for URL.";
       exit;
     }
   }

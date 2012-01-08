@@ -19,3 +19,10 @@ Comment.prototype.add_to_dom = function(){
 Comment.prototype.save = function(){
     
 }
+
+/*
+* Delete the comment from persistent storage.
+*/
+Comment.prototype.delete = function() {
+    
+}
