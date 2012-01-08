@@ -69,6 +69,7 @@ Comment.prototype.delete = function() {
     if(Comment.is_editing()) {
         this.file.remove_dialog();
     }
+    this.file.unhighlight_range(this.range);
     
     console.info("DELETE!");
 }
