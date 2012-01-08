@@ -9,13 +9,16 @@ function Comment(options){
  * This function should add a comment to the DOM
  */
 Comment.prototype.add_to_dom = function() {
-    // figure out which line to add comment to
+    var self = this;
+    
     var data = this.get_display_data();
     var html = $('#commentTemplate').tmpl(data);
     
     var commentLocation = $('.number' + this.range.higher, '.code_container[data-name="' + this.file.name+'"]');
     commentLocation.after(html);
-    return html;
+    html.bind('click', function() {
+        self.edit();
+    });
 }
 
 /*

@@ -7,10 +7,7 @@ function CodeFile(options){
 // Add a comment object to the list of comments for this file
 CodeFile.prototype.add_comment = function(comment){
     this.comments.push(comment);
-    var comment_html = comment.add_to_dom();
-    comment_html.bind('click', function() {
-        comment.edit();
-    });
+    comment.add_to_dom();
     this.highlight_range(comment.range);
 }
 
