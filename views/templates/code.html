@@ -11,6 +11,7 @@
 <script type="text/javascript" src="{$ROOT_URL}/static/js/lib/jquery-ui.min.js"></script>
 
 <script type="text/javascript" src="{$ROOT_URL}/static/js/Paperless.js"></script>
+<script type="text/javascript" src="{$ROOT_URL}/static/js/CodeManager.js"></script>
 <script type="text/javascript" src="{$ROOT_URL}/static/js/CodeFile.js"></script>
 <script type="text/javascript" src="{$ROOT_URL}/static/js/Comment.js"></script>
 <script type="text/javascript" src="{$ROOT_URL}/static/js/LineRange.js"></script>
@@ -25,7 +26,8 @@ $(function(){
 		/*
 		* Provide a markdown converter to all utilities
 		*/
-		converter: new Showdown.converter()
+		converter: new Showdown.converter(),
+		commenter: "Jeremy" // TODO
 	};
 	
 	Paperless.Setup.start();
