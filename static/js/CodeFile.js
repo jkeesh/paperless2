@@ -101,18 +101,8 @@ CodeFile.mouse_entered = function(event) {
 	}
 	
 	var line_no = code_file.get_line_number(this);
-	
-	old_range = new LineRange(code_file.selected_range_start, code_file.selected_range_end);
-	range = new LineRange(code_file.selected_range_start, line_no);
-	range.each(function(line_no) {
-	    var line = code_file.get_line(line_no);
-	    code_file.hilite_line(line);
-	});
-	
-	for (var i = old_range.higher; i > range.higher; i--) {
-		var line = code_file.get_line(i);
-	    code_file.unhilite_line(line);
-	}
+	var line = code_file.get_line(line_no);
+	code_file.hilite_line(line);
 	
 	code_file.selected_range_end = line_no;
 }
