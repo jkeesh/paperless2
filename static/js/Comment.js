@@ -42,8 +42,7 @@ Comment.prototype.delete = function() {
 Comment.prototype.edit = function() {
     var self = this;
     
-	// if(commentOpen) return;
-	//     commentOpen = true;
+	if(this.is_editing()) return;
 
     var range_last_line = this.file.get_line(this.range.higher).first();
     var range_viewport_y = range_last_line.offset().top - window.pageYOffset;
@@ -88,4 +87,11 @@ Comment.prototype.get_display_data = function() {
         formatted_text: formatted_text
     };
     return data;
+}
+
+Comment.prototype.is_editing = function() {
+    // assume that if there is a textarea on screen then
+    // we are editing a comment
+    if($("textarea").length > 0) return true;
+    return false; 
 }
