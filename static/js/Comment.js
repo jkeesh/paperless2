@@ -14,9 +14,7 @@ Comment.prototype.add_to_dom = function() {
     var html = $('#commentTemplate').tmpl(data);
     
     var commentLocation = $('.number' + this.range.higher, '.code_container[data-name="' + this.file.name+'"]');
-    commentLocation.after(html);
-    
-    
+    commentLocation.after(html);   
 }
 
 /*
