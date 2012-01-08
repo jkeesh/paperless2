@@ -55,7 +55,7 @@ Comment.prototype.save = function(){
         this.file.remove_dialog();
     }
     
-    console.info("SAVE!");
+    this.ajax("save");
 }
 
 /*
@@ -71,7 +71,7 @@ Comment.prototype.delete = function() {
     }
     this.file.unhighlight_range(this.range);
     
-    console.info("DELETE!");
+    this.ajax("delete");
 }
 
 /*
@@ -112,6 +112,37 @@ Comment.prototype.edit = function() {
     this.file.current_dialog = current_dialog;
 
     $("textarea").focus();		
+}
+
+Comment.prototype.ajax = function(action){
+    var self = this;
+	$.ajax({
+		   type: 'POST',
+		   url: window.location.pathname, // post to current location url
+		   data: {
+		       action: action,
+		       text: this.text,
+		       rangeLower: this.range.lower,
+		       rangeHigher: this.range.higher,
+		       filename: this.file.name,
+		   },
+		   success: function(response) {
+			    if(response && response.status == "ok"){ 
+			        if(response.action == "create"){
+			            console.info("CREATED A COMMENT!");
+			        }
+			    } else {
+			        if(response.why){
+			            alert(response.why);
+			        }else{
+			            alert("There was an error with this comment. Try refreshing the page.");
+			        }
+                }        			
+		   },
+		   error: function(jqXHR, textStatus, errorThrown) {
+		        alert("There was an error with this comment. Try refreshing the page.");
+		   }
+	});
 }
 
 

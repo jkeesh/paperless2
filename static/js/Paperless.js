@@ -11,6 +11,18 @@ Paperless.FileManager = {
     // Add a file to the file manager
     add_file: function(file){
         this.files.push(file);
+    },
+    
+    get_file: function(name) {
+        console.info(this.files);
+        for(var idx in this.files) {
+            var file = this.files[idx];
+            console.info(file);
+            if(file.name == name) {
+                return file;
+            }
+        }
+        return null;
     }
 };
 
@@ -20,28 +32,29 @@ Paperless.FileManager = {
  */
 Paperless.Setup = {
     
-    /// TODO ... maybe not the best way to set this up... files arent
-    /// created if there werent comments yet... maybe do this in two spearte setesp
     create_comments: function(){
+        
+        $('.filelink').each(function(idx, elem) {
+            var new_file = new CodeFile({
+                name: $("a", elem).attr('data-name')
+            });
+            Paperless.FileManager.add_file(new_file);
+        });
+           
         // For every file create a new CodeFile object
         $('.file_comments').each(function(idx, elem){
-            
-           var new_file = new CodeFile({
-               name: $(elem).attr('data-file')
-           });
-           Paperless.FileManager.add_file(new_file);
-           
            // For every comment on this file, create a new comment object
            // and add it to the code file
-           $(this).children().each(function(idx, comment){
+           cur_file = Paperless.FileManager.get_file($(this).attr('data-file'));
+           $(this).children().each(function(idx, comment) {
                var new_comment = new Comment({
                    text: $(comment).attr('data-comment'),
                    commenter: $(comment).attr('data-commenter'),
                    range_string: $(comment).attr('data-range'),
-                   file: new_file
+                   file: cur_file
                });
                
-               new_file.add_comment(new_comment);
+               cur_file.add_comment(new_comment);
            }) ;
         });
     },

@@ -54,7 +54,15 @@ class Utilities {
 			$contents = file_get_contents($file);
 			return json_decode($contents);
 		}
-		return array();
+		return new stdClass;
+	}
+	
+	public static function write_comments($dirname, $comments){
+		$file = $dirname . 'comments.json';
+		$encoded_comments = json_encode($comments);
+		if(file_put_contents($file, $encoded_comments) === FALSE) {
+			echo "FAILED TO WRITE FILE.";
+		}
 	}
 
 
