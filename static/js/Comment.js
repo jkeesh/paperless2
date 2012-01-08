@@ -14,7 +14,8 @@ Comment.prototype.add_to_dom = function() {
     var html = $('#commentTemplate').tmpl(data);
     
     var commentLocation = $('.number' + this.range.higher, '.code_container[data-name="' + this.file.name+'"]');
-    commentLocation.after(html);   
+    commentLocation.after(html);
+    return html;
 }
 
 /*
@@ -22,14 +23,49 @@ Comment.prototype.add_to_dom = function() {
  * The changes to be saved should be the current contents of 'text'
  */
 Comment.prototype.save = function(){
-    
+    console.info("SAVE!");
 }
 
 /*
 * Delete the comment from persistent storage.
 */
 Comment.prototype.delete = function() {
+    console.info("DELETE!");
+}
+
+/*
+* Open modal dialog for editing a comment.
+*/
+Comment.prototype.edit = function() {
+    var self = this;
     
+	// if(commentOpen) return;
+	//     commentOpen = true;
+
+    var range_last_line = this.file.get_line(this.range.higher).first();
+    var range_viewport_y = range_last_line.offset().top - window.pageYOffset;
+
+    // setup the new dialog with the text of the current comement
+    current_dialog = $('<div></div>')
+    .html('<textarea>' + this.text +'</textarea><div class="modalMessage">Comments are formatted using ' +
+         '<a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown.</a><br/>' +
+          'Ctrl+3 For simple markdown reference.</div>')
+    .dialog({
+    		autoOpen: true,
+    		title: 'Enter Comment',
+    		width: 350,
+    		height: 250,
+            position: ['center', range_viewport_y + 30],
+    		focus: true,
+    		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide();},
+    		closeOnEscape: false,
+    		buttons: { 
+    		   "Submit":  function() { self.save(); }, 
+    		   "Delete":  function() { self.delete(); },
+    		}
+    });
+
+    $("textarea").focus();		
 }
 
 
