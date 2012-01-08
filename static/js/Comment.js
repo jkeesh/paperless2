@@ -9,7 +9,14 @@ function Comment(options){
  * This function should add a comment to the DOM
  */
 Comment.prototype.add_to_dom = function(){
-    
+    // figure out which line to add comment to
+    console.info(this.file.name);
+    console.info(this.range.higher);
+    console.info('.code_container[data-name="' + this.file.name+'"]');
+    console.info($('.code', '.code_container[data-name="' + this.file.name+'"]'));
+    console.info($('.number1'));
+    var commentLocation = $('.number' + this.range.higher, '.code_container[data-name="' + this.file.name+'"]');
+    console.info(commentLocation);
 }
 
 /*

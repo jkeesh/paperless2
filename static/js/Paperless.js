@@ -48,7 +48,7 @@ Paperless.Setup = {
     
     
     start: function(){
-        Paperless.Setup.create_comments();
+        $(document).bind("status.finishedSyntaxHighlighting", Paperless.Setup.create_comments);
         D.log(Paperless);
     }
 };
