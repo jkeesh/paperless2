@@ -26,6 +26,11 @@ Comment.prototype.add_to_dom = function() {
  * The changes to be saved should be the current contents of 'text'
  */
 Comment.prototype.save = function(){
+    var commentText = $("textarea").val();
+	commentText = this.filter(commentText);
+	
+    this.add_to_dom();
+    
     console.info("SAVE!");
 }
 
@@ -74,6 +79,23 @@ Comment.prototype.edit = function() {
 /*****************************
 * Begin private helper methods
 ******************************/
+
+/*
+ * Comment.prototype.filter
+ * =====================
+ * Replace all of the text with ampersands and angle brackets with their
+ * HTML entity equivalents.
+ *
+ * @param   text    {string}    the text to filter
+ *
+ * @author  Jeremy Keeshin  December 26, 2011
+ */
+Comment.prototype.filter = function(text){
+	text = text.replace(/&/g, '&amp;');		
+	text = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+	return text;
+}
+
 Comment.prototype.get_display_data = function() {
     
     formatted_text = Paperless.CONFIGURATION.converter.makeHtml(this.text);	
