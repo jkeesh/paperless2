@@ -8,15 +8,15 @@ function Comment(options){
 /*
  * This function should add a comment to the DOM
  */
-Comment.prototype.add_to_dom = function(){
+Comment.prototype.add_to_dom = function() {
     // figure out which line to add comment to
-    console.info(this.file.name);
-    console.info(this.range.higher);
-    console.info('.code_container[data-name="' + this.file.name+'"]');
-    console.info($('.code', '.code_container[data-name="' + this.file.name+'"]'));
-    console.info($('.number1'));
+    var data = this.get_display_data();
+    var html = $('#commentTemplate').tmpl(data);
+    
     var commentLocation = $('.number' + this.range.higher, '.code_container[data-name="' + this.file.name+'"]');
-    console.info(commentLocation);
+    commentLocation.after(html);
+    
+    
 }
 
 /*
@@ -32,4 +32,23 @@ Comment.prototype.save = function(){
 */
 Comment.prototype.delete = function() {
     
+}
+
+
+/*****************************
+* Begin private helper methods
+******************************/
+Comment.prototype.get_display_data = function() {
+    
+    formatted_text = Paperless.CONFIGURATION.converter.makeHtml(this.text);	
+	formatted_text = formatted_text.replace(/&amp;/g, '&');
+	
+    var data = {
+        range_text: this.range.to_string(),
+        text: this.text,
+        commenter: this.commenter,
+        file_name: this.file.name,
+        formatted_text: formatted_text
+    };
+    return data;
 }
