@@ -28,6 +28,8 @@ Paperless.FileManager = {
 
 Paperless.CommentManager = {
     
+    current_comment: null,
+    
     preset_comments: [],
     
     /*
@@ -44,23 +46,30 @@ Paperless.CommentManager = {
         return result;
     },
     
+    tab_submit: function(){
+        $(document).keyup(function(e) {
+            if(e.keyCode == 9){ // tab key
+                D.log("SUBMIT COMMENT");
+                
+                if(Paperless.CommentManager.current_comment){
+                    Paperless.CommentManager.current_comment.save();
+                }
+            }
+        });
+    },
+    
     setup: function(){
+        Paperless.CommentManager.tab_submit();
+        
         $('.preset_option').live('click', function(){
-            var chosen_option = $(this).html();
-            D.log(chosen_option);
-            
-            D.log($('textarea'));
-            
-            var textarea = $('textarea');
-            
+            var chosen_option = $(this).html();            
+            var textarea = $('textarea');            
             var oldval = textarea.val();
-            D.log(oldval);
-            D.log(oldval.length);
-            
+
             if(oldval.length == 0){
                 textarea.val(chosen_option);
             }else{
-                textarea.val(textarea.val() + '\n\n' + chosen_option);
+                textarea.val(oldval + '\n\n' + chosen_option);
             }
         });
     }

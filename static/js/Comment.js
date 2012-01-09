@@ -86,6 +86,8 @@ Comment.prototype.delete = function() {
 Comment.prototype.edit = function() {
     var self = this;
     
+    Paperless.CommentManager.current_comment = this;
+    
     this.remove_from_dom();
 	if(Comment.is_editing()) return;
 
@@ -115,7 +117,8 @@ Comment.prototype.edit = function() {
     });
     this.file.current_dialog = current_dialog;
 
-    $("textarea").focus();		
+    $("textarea").focus();	
+    
 }
 
 Comment.prototype.ajax = function(action){
