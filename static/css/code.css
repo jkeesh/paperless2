@@ -20,3 +20,14 @@ textarea{
 .modalMessage{
     font-size: 10px;
 }
+
+.preset_option{
+    cursor: pointer;
+    margin: 3px;
+    font-size: 15px;
+    padding: 3px;
+}
+
+.preset_option:hover{
+    background-color: #ccc;
+}

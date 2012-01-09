@@ -42,6 +42,27 @@ Paperless.CommentManager = {
             result += "</div>";
         }
         return result;
+    },
+    
+    setup: function(){
+        $('.preset_option').live('click', function(){
+            var chosen_option = $(this).html();
+            D.log(chosen_option);
+            
+            D.log($('textarea'));
+            
+            var textarea = $('textarea');
+            
+            var oldval = textarea.val();
+            D.log(oldval);
+            D.log(oldval.length);
+            
+            if(oldval.length == 0){
+                textarea.val(chosen_option);
+            }else{
+                textarea.val(textarea.val() + '\n\n' + chosen_option);
+            }
+        });
     }
 }
 
@@ -91,6 +112,7 @@ Paperless.Setup = {
     start: function(){
         $(document).bind("status.finishedSyntaxHighlighting", Paperless.Setup.create_comments);
         Paperless.Setup.create_preset_comments();
+        Paperless.CommentManager.setup();
         D.log(Paperless);
     }
 };

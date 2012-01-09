@@ -64,6 +64,8 @@ Comment.prototype.save = function(){
  * Delete the comment from persistent storage.
  *
  * @author  Eric Conner  January 8, 2012
+ *
+ * TODO bug on delete empty comment--- really should be cancel -- jeremy
  */
 Comment.prototype.delete = function() {
     if(Comment.is_editing()) {
@@ -96,12 +98,12 @@ Comment.prototype.edit = function() {
     current_dialog = $('<div></div>')
     .html('<textarea>' + this.text +'</textarea><div class="modalMessage">Comments are formatted using ' +
          '<a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown.</a><br/>' +
-          'Ctrl+3 For simple markdown reference.</div>' + presets)
+          'Can click preset comment below.</div>' + presets)
     .dialog({
     		autoOpen: true,
     		title: 'Enter Comment',
     		width: 350,
-    		height: 250,
+    		height: 450,
             position: ['center', range_viewport_y + 30],
     		focus: true,
     		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide();},
