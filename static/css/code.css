@@ -1,0 +1,22 @@
+.hiddenPlainText{
+    display: none;
+}
+
+.code .container .inlineComment{
+    border: 1px solid black !important;
+    padding: 7px !important;
+}
+
+.code .container .inlineComment .inlineCommentText{
+    font-family: Helvetica !important;
+}
+
+
+textarea{
+    width: 300px;
+    height: 100px;
+}
+
+.modalMessage{
+    font-size: 10px;
+}
