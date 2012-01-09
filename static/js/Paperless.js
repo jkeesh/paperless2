@@ -26,6 +26,25 @@ Paperless.FileManager = {
     }
 };
 
+Paperless.CommentManager = {
+    
+    preset_comments: [],
+    
+    /*
+     * Return html to be displayed in a modal dialog containing
+     * all of the preset comments for this assignment.
+     */
+    get_preset_comment_html: function(){
+        var result = "";
+        for(var i = 0; i < this.preset_comments.length; i++){
+            result += "<div class='preset_option'>";
+            result += this.preset_comments[i];
+            result += "</div>";
+        }
+        return result;
+    }
+}
+
 
 /*
  * Handle the setup of the page.
@@ -60,11 +79,11 @@ Paperless.Setup = {
     },
     
     create_preset_comments: function(){
-        Paperless.CONFIGURATION.preset_comments = [];
+        Paperless.CommentManager.preset_comments = [];
         $('.preset_comment').each(function(idx, elem){
             var comment = $.trim($(elem).html());
             D.log(comment);
-            Paperless.CONFIGURATION.preset_comments.push(comment);
+            Paperless.CommentManager.preset_comments.push(comment);
         });
     },
     
