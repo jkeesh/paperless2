@@ -29,8 +29,10 @@ class CodeHandler extends ToroHandler {
 		$preset_comments = array();
 		foreach($config->assignments as $entry){
 			if($entry->dir == $assignment){
-				$preset_comments = $entry->comments;
-				break;
+				if(property_exists($entry, 'comments')){
+					$preset_comments = $entry->comments;
+					break;
+				}
 			}
 		}
 		
