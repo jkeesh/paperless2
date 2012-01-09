@@ -26,10 +26,18 @@ Paperless.FileManager = {
     }
 };
 
+/*
+ * Controls the functions relating to the setup of the comments, and dealing 
+ * with the preset comments.
+ * 
+ * Handle shortcuts on comments, such as tab for submit
+ */
 Paperless.CommentManager = {
     
+    // The current comment object
     current_comment: null,
     
+    // A list of all of the preset comments for the current submission
     preset_comments: [],
     
     /*
