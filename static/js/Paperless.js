@@ -59,9 +59,19 @@ Paperless.Setup = {
         });
     },
     
+    create_preset_comments: function(){
+        Paperless.CONFIGURATION.preset_comments = [];
+        $('.preset_comment').each(function(idx, elem){
+            var comment = $.trim($(elem).html());
+            D.log(comment);
+            Paperless.CONFIGURATION.preset_comments.push(comment);
+        });
+    },
+    
     
     start: function(){
         $(document).bind("status.finishedSyntaxHighlighting", Paperless.Setup.create_comments);
+        Paperless.Setup.create_preset_comments();
         D.log(Paperless);
     }
 };
