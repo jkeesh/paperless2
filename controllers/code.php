@@ -59,6 +59,7 @@ class CodeHandler extends ToroHandler {
 		
 		Utilities::write_comments($dirname, $comments);
 		
+		echo json_encode(array("status" => "ok", "action" => $_POST['action']));
 	}
 }
 

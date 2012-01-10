@@ -49,11 +49,6 @@ Comment.prototype.remove_from_dom = function() {
 Comment.prototype.save = function(){
     var commentText = $("textarea").val();
 	this.text = this.filter(commentText);
-	
-    this.add_to_dom();
-    if(Comment.is_editing()) {
-        this.file.remove_dialog();
-    }
     
     this.ajax("save");
 }
@@ -128,8 +123,11 @@ Comment.prototype.ajax = function(action){
 		   },
 		   success: function(response) {
 			    if(response && response.status == "ok"){ 
-			        if(response.action == "create"){
-			            console.info("CREATED A COMMENT!");
+			        if(response.action == "save"){
+			            this.add_to_dom();
+                        if(Comment.is_editing()) {
+                            this.file.remove_dialog();
+                        }
 			        }
 			    } else {
 			        if(response.why){
