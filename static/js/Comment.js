@@ -131,9 +131,9 @@ Comment.prototype.ajax = function(action){
 		   success: function(response) {
 			    if(response && response.status == "ok"){ 
 			        if(response.action == "save"){
-			            this.add_to_dom();
+			            self.add_to_dom();
                         if(Comment.is_editing()) {
-                            this.file.remove_dialog();
+                            self.file.remove_dialog();
                         }
 			        }
 			    } else {
