@@ -1,3 +1,4 @@
 .DS_Store
 views/templates_c/
 .htaccess
+comments.json

@@ -14,7 +14,13 @@
 		},
 		{
 			"name": "The Second Assignment",
-			"dir": "assign2"
+			"dir": "assign2",
+			"comments": [
+				"Forgot to free memory",
+				"Need better decomposition",
+				"Spacing is off",
+				"Valgrind fail"
+			]
 		},
 		{
 			"name": "The Third Assignment",

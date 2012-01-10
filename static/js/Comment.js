@@ -59,6 +59,8 @@ Comment.prototype.save = function(){
  * Delete the comment from persistent storage.
  *
  * @author  Eric Conner  January 8, 2012
+ *
+ * TODO bug on delete empty comment--- really should be cancel -- jeremy
  */
 Comment.prototype.delete = function() {
     if(Comment.is_editing()) {
@@ -79,22 +81,26 @@ Comment.prototype.delete = function() {
 Comment.prototype.edit = function() {
     var self = this;
     
+    Paperless.CommentManager.current_comment = this;
+    
     this.remove_from_dom();
 	if(Comment.is_editing()) return;
 
     var range_last_line = this.file.get_line(this.range.higher).first();
     var range_viewport_y = range_last_line.offset().top - window.pageYOffset;
+    
+    var presets = Paperless.CommentManager.get_preset_comment_html();
 
     // setup the new dialog with the text of the current comement
     current_dialog = $('<div></div>')
     .html('<textarea>' + this.text +'</textarea><div class="modalMessage">Comments are formatted using ' +
          '<a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown.</a><br/>' +
-          'Ctrl+3 For simple markdown reference.</div>')
+          'Can click preset comment below.</div>' + presets)
     .dialog({
     		autoOpen: true,
     		title: 'Enter Comment',
     		width: 350,
-    		height: 250,
+    		height: 450,
             position: ['center', range_viewport_y + 30],
     		focus: true,
     		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide();},
@@ -106,7 +112,8 @@ Comment.prototype.edit = function() {
     });
     this.file.current_dialog = current_dialog;
 
-    $("textarea").focus();		
+    $("textarea").focus();	
+    
 }
 
 Comment.prototype.ajax = function(action){

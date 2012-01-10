@@ -16,6 +16,8 @@
 <script type="text/javascript" src="{$ROOT_URL}/static/js/Comment.js"></script>
 <script type="text/javascript" src="{$ROOT_URL}/static/js/LineRange.js"></script>
 
+<link type="text/css" rel="stylesheet" href="{$ROOT_URL}/static/css/code.css" />
+
 {include file="codepage/comment_template.html"}
 
 <script type="text/javascript">
@@ -34,6 +36,11 @@ $(function(){
 });
 </script>
 
+{foreach from=$preset_comments item=comment}
+<div class="preset_comment">
+	{$comment}
+</div>
+{/foreach}
 
 {foreach from=$comments item=file key=filename}
 <div class="file_comments"

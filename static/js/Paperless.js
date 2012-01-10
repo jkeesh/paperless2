@@ -26,6 +26,63 @@ Paperless.FileManager = {
     }
 };
 
+/*
+ * Controls the functions relating to the setup of the comments, and dealing 
+ * with the preset comments.
+ * 
+ * Handle shortcuts on comments, such as tab for submit
+ */
+Paperless.CommentManager = {
+    
+    // The current comment object
+    current_comment: null,
+    
+    // A list of all of the preset comments for the current submission
+    preset_comments: [],
+    
+    /*
+     * Return html to be displayed in a modal dialog containing
+     * all of the preset comments for this assignment.
+     */
+    get_preset_comment_html: function(){
+        var result = "";
+        for(var i = 0; i < this.preset_comments.length; i++){
+            result += "<div class='preset_option'>";
+            result += this.preset_comments[i];
+            result += "</div>";
+        }
+        return result;
+    },
+    
+    tab_submit: function(){
+        $(document).keyup(function(e) {
+            if(e.keyCode == 9){ // tab key
+                D.log("SUBMIT COMMENT");
+                
+                if(Paperless.CommentManager.current_comment){
+                    Paperless.CommentManager.current_comment.save();
+                }
+            }
+        });
+    },
+    
+    setup: function(){
+        Paperless.CommentManager.tab_submit();
+        
+        $('.preset_option').live('click', function(){
+            var chosen_option = $(this).html();            
+            var textarea = $('textarea');            
+            var oldval = textarea.val();
+
+            if(oldval.length == 0){
+                textarea.val(chosen_option);
+            }else{
+                textarea.val(oldval + '\n\n' + chosen_option);
+            }
+        });
+    }
+}
+
 
 /*
  * Handle the setup of the page.
@@ -59,9 +116,20 @@ Paperless.Setup = {
         });
     },
     
+    create_preset_comments: function(){
+        Paperless.CommentManager.preset_comments = [];
+        $('.preset_comment').each(function(idx, elem){
+            var comment = $.trim($(elem).html());
+            D.log(comment);
+            Paperless.CommentManager.preset_comments.push(comment);
+        });
+    },
+    
     
     start: function(){
         $(document).bind("status.finishedSyntaxHighlighting", Paperless.Setup.create_comments);
+        Paperless.Setup.create_preset_comments();
+        Paperless.CommentManager.setup();
         D.log(Paperless);
     }
 };

@@ -22,9 +22,22 @@ class CodeHandler extends ToroHandler {
 		
 		// /cs107.1122/repos/assign2/jdoe/comments.json
 		$comments = Utilities::get_comments($dirname);
-		print_r($comments);
+		// print_r($comments);
 		
 		$config = Utilities::get_configuration($qid, $class);
+		
+		$preset_comments = array();
+		foreach($config->assignments as $entry){
+			if($entry->dir == $assignment){
+				if(property_exists($entry, 'comments')){
+					$preset_comments = $entry->comments;
+					break;
+				}
+			}
+		}
+		
+		$this->smarty->assign("preset_comments", $preset_comments);
+		print_r($preset_comments);
 		
 		// probably change this decomp
 		$all_files = Utilities::get_all_files($dirname);
@@ -39,9 +52,7 @@ class CodeHandler extends ToroHandler {
 	 * Handles adding and deleting comments.
 	 */
 	public function post_xhr($qid, $class, $assignment, $student) {
-		if($student != USERNAME){
-			Permissions::TA_GATE($qid, $class, USERNAME);
-		}
+		Permissions::TA_GATE($qid, $class, USERNAME);
 		
 		// /cs107.1122/repos/assign2/jdoe/comments.json
 		$dirname = Utilities::get_student_dir($qid, $class, $assignment, $student);
