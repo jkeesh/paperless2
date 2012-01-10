@@ -9,22 +9,53 @@ function CodeFile(options){
     this.add_handlers();
 }
 
-// Add a comment object to the list of comments for this file
+/*
+ * CodeFile.prototype.add_comment
+ * ------------------------
+ * Add a comment object to the list of comments for this file. Also
+ * highlight the range associated with this comment.
+ *
+ * @author  Jeremy Keeshin  January 8, 2012
+ * @edited  Eric Conner     January 10, 2012
+ */
 CodeFile.prototype.add_comment = function(comment){
     this.comments.push(comment);
     comment.add_to_dom();
     this.highlight_range(comment.range);
 }
 
+/*
+ * CodeFile.prototype.highlight_range
+ * ------------------------
+ * Highlight the set of lines defined by a range object.
+ *
+ * @param   range    {LineRange Object}    The range of lines to highlight.
+ *
+ * @author  Jeremy Keeshin  January 8, 2012
+ * @edited  Eric Conner     January 10, 2012
+ */
 CodeFile.prototype.highlight_range = function(range){		
 	for (var i = range.lower; i <= range.higher; i++) {
-	    
 	    var line = this.get_line(i);
 		this.hilite_line(line);
+		
+		// maintain a highlight count so that we know if this line
+		// has multiple highlights
 		this.highlights[i]++;
 	}  
 }
 
+
+/*
+ * CodeFile.prototype.unhighlight_range
+ * ------------------------
+ * Unhighlight the set of lines defined by a range object.
+ *
+ * @param   range    {LineRange Object}    The range of lines to unhighlight.
+ *
+ * @author  Jeremy Keeshin  January 8, 2012
+ * @edited  Eric Conner     January 10, 2012
+ */
 CodeFile.prototype.unhighlight_range = function(range){		
 	for (var i = range.lower; i <= range.higher; i++) {
 		
@@ -41,6 +72,16 @@ CodeFile.prototype.unhighlight_range = function(range){
 	}
 }
 
+/*
+ * CodeFile.prototype.get_line
+ * ------------------------
+ * Get the JQuery DOM object for a specific line number from the code file.
+ *
+ * @param   line_no    {int}    The line number of the element to return.
+ *
+ * @author  Jeremy Keeshin  January 8, 2012
+ * @edited  Eric Conner     January 10, 2012
+ */
 CodeFile.prototype.get_line = function(line_no) {
     var file_selector = '.code_container[data-name="'+this.name+'"]';
 	var theclass = '.number' + line_no;
@@ -80,9 +121,9 @@ CodeFile.prototype.get_line_number = function(line) {
 
     
 /*
- * remove_dialog
+ * CodeFile.prototype.remove_dialog
  * --------------------
- * This function removes a modal dialog from the view, but is
+ * Remove a modal dialog from the view.  Note: this is
  * safe because it checks the existence of a textarea on the 
  * screen before removing
  */
@@ -94,6 +135,13 @@ CodeFile.prototype.remove_dialog = function() {
 	this.current_dialog = null;
 }
 
+
+/*
+ * CodeFile.prototype.mouse_pressed
+ * --------------------
+ * Handle when the mouse is pressed on any of the lines within
+ * the code file div.
+ */
 CodeFile.mouse_pressed = function(event) {
 	if(Comment.is_editing()) return;
 	
@@ -111,15 +159,20 @@ CodeFile.mouse_pressed = function(event) {
 	return false;
 }
 
+/*
+ * CodeFile.prototype.mouse_entered
+ * --------------------
+ * Handle the event where the mouse is dragged across multiple lines. In
+ * this case the mouse will "enter" multiple lines of text so this event
+ * responds to the mouse entered event for each line.
+ */
 CodeFile.mouse_entered = function(event) {
-    
 	code_file = event.data.code_file;
 	if (CodeManager.dragging_in_file != code_file) {
 		return;
 	}
 	
 	var line_no = code_file.get_line_number(this);
-	
 	old_range = new LineRange(code_file.selected_range_start, code_file.selected_range_end);
 	range = new LineRange(code_file.selected_range_start, line_no);
 	range.each(function(line_no) {
@@ -135,6 +188,12 @@ CodeFile.mouse_entered = function(event) {
 	code_file.selected_range_end = line_no;
 }
 
+/*
+ * CodeFile.prototype.mouse_up
+ * --------------------
+ * Handle the event where a person has finished dragging within the
+ * file and lets the mouse up.
+ */
 CodeFile.mouse_up = function(event) {
 	if (CodeManager.dragging_in_file == null) {
 	    return;
