@@ -7,9 +7,7 @@
 			}else{
 				$student_url = ROOT_URL . "/" . $qid . "/" . $class . "/student/" . USERNAME;
 				Header("Location: " . $student_url);	
-			}
-			
-			$this->smarty->display("router.html");			
+			}			
 		}		
 	}
 ?>

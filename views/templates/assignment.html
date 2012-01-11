@@ -1,9 +1,12 @@
-<div>
-	Submissions for {$class} {$assn}
-</div>
+{extends file="base.html"} 
+{block name="content"}
+		<div>
+			Submissions for {$class} {$assn}
+		</div>
 
-{foreach from=$students item=student}
-<div>
-	<a href="../code/{$assn}/{$student}">{$student}</a>
-</div>
-{/foreach}
+		{foreach from=$students item=student}
+		<div>
+			<a href="../code/{$assn}/{$student}">{$student}</a>
+		</div>
+		{/foreach}
+{/block}

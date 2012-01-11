@@ -1,61 +1,44 @@
-<link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css">
+{extends file="base.html"} 
+{block name="content"}
+		{include file="codepage/comment_template.html"}
 
-<script type="text/javascript" src="{$ROOT_URL}/static/js/lib/showdown.js"></script>
+		<script type="text/javascript">
+		SyntaxHighlighter.all();
 
-<script type="text/javascript" src="{$ROOT_URL}/static/js/lib/syntaxhighlighter/scripts/shCore.js?v"></script>
-<link type="text/css" rel="stylesheet" href="{$ROOT_URL}/static/js/lib/syntaxhighlighter/styles/shCoreDefault.css" id="syntaxStylesheet" />
-<script type="text/javascript" src="{$ROOT_URL}/static/js/lib/syntaxhighlighter/scripts/shBrushCpp.js"></script>
-
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script type="text/javascript" src="{$ROOT_URL}/static/js/lib/jquery.tmpl.min.js"></script>
-<script type="text/javascript" src="{$ROOT_URL}/static/js/lib/jquery-ui.min.js"></script>
-
-<script type="text/javascript" src="{$ROOT_URL}/static/js/Paperless.js"></script>
-<script type="text/javascript" src="{$ROOT_URL}/static/js/CodeManager.js"></script>
-<script type="text/javascript" src="{$ROOT_URL}/static/js/CodeFile.js"></script>
-<script type="text/javascript" src="{$ROOT_URL}/static/js/Comment.js"></script>
-<script type="text/javascript" src="{$ROOT_URL}/static/js/LineRange.js"></script>
-
-<link type="text/css" rel="stylesheet" href="{$ROOT_URL}/static/css/code.css" />
-
-{include file="codepage/comment_template.html"}
-
-<script type="text/javascript">
-SyntaxHighlighter.all();
-
-$(function(){
-	Paperless.CONFIGURATION = {
-		/*
-		* Provide a markdown converter to all utilities
-		*/
-		converter: new Showdown.converter(),
-		commenter: "{$username}"
-	};
+		$(function(){
+			Paperless.CONFIGURATION = {
+				/*
+				* Provide a markdown converter to all utilities
+				*/
+				converter: new Showdown.converter(),
+				commenter: "{$username}"
+			};
 	
-	Paperless.Setup.start();
-});
-</script>
+			Paperless.Setup.start();
+		});
+		</script>
 
-{foreach from=$preset_comments item=comment}
-<div class="preset_comment">
-	{$comment}
-</div>
-{/foreach}
+		{foreach from=$preset_comments item=comment}
+		<div class="preset_comment">
+			{$comment}
+		</div>
+		{/foreach}
 
-{foreach from=$comments item=file key=filename}
-<div class="file_comments"
-	data-file="{$filename}">
-	{foreach from=$file item=comment key=range}
-<div class="comment"
-	data-range="{$range}"
-	data-commenter="{$comment->commenter}"
-	data-comment="{$comment->comment}"></div>
-	{/foreach}
-</div>
-{/foreach}
+		{foreach from=$comments item=file key=filename}
+		<div class="file_comments"
+			data-file="{$filename}">
+			{foreach from=$file item=comment key=range}
+		<div class="comment"
+			data-range="{$range}"
+			data-commenter="{$comment->commenter}"
+			data-comment="{$comment->comment}"></div>
+			{/foreach}
+		</div>
+		{/foreach}
 
 
-{include file="codepage/code_filelist.html"}
+		{include file="codepage/code_filelist.html"}
 
-{include file="codepage/code_files.html"} 
+		{include file="codepage/code_files.html"} 
+{/block}
 

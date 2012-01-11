@@ -1,9 +1,12 @@
-<div>
-	Assignment Listing for {$class}
-</div>
+{extends file="base.html"} 
+		{block name="content"}
+		<div>
+			Assignment Listing for {$class}
+		</div>
 
-{foreach from=$assns item=assn}
-<div>
-	<a href="assignment/{$assn}">{$assn}</a>
-</div>
-{/foreach}
+		{foreach from=$assns item=assn}
+		<div>
+			<a href="assignment/{$assn}">{$assn}</a>
+		</div>
+		{/foreach}
+{/block}

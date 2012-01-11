@@ -1,5 +1,8 @@
+{extends file="base.html"} 
+{block name="content"}
 {foreach from=$submissions item=submission}
 <div>
 	<a href="../code/{$submission}/{$student}">{$submission}</a>
 </div>
 {/foreach}
+{/block}
