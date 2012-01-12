@@ -31,3 +31,7 @@ textarea{
 .preset_option:hover{
     background-color: #ccc;
 }
+
+.preset_comment {
+    display: none;
+}

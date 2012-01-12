@@ -1,6 +1,6 @@
 {
 	"class": "cs107",
-	"tas": ["econner"],
+	"tas": ["econner", "jkeeshin"],
 	"extension_whitelist": ["h", "c"],
 	"assignments": [
 		{
