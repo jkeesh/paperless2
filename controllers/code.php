@@ -22,7 +22,6 @@ class CodeHandler extends ToroHandler {
 		
 		// /cs107.1122/repos/assign2/jdoe/comments.json
 		$comments = Utilities::get_comments($dirname);
-		// print_r($comments);
 		
 		$config = Utilities::get_configuration($qid, $class);
 		
@@ -37,7 +36,6 @@ class CodeHandler extends ToroHandler {
 		}
 		
 		$this->smarty->assign("preset_comments", $preset_comments);
-		print_r($preset_comments);
 		
 		// probably change this decomp
 		$all_files = Utilities::get_all_files($dirname);
@@ -70,6 +68,7 @@ class CodeHandler extends ToroHandler {
 		
 		Utilities::write_comments($dirname, $comments);
 		
+		echo json_encode(array("status" => "ok", "action" => $_POST['action']));
 	}
 }
 

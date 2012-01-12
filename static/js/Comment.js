@@ -49,11 +49,6 @@ Comment.prototype.remove_from_dom = function() {
 Comment.prototype.save = function(){
     var commentText = $("textarea").val();
 	this.text = this.filter(commentText);
-	
-    this.add_to_dom();
-    if(Comment.is_editing()) {
-        this.file.remove_dialog();
-    }
     
     this.ajax("save");
 }
@@ -95,6 +90,18 @@ Comment.prototype.edit = function() {
     var range_viewport_y = range_last_line.offset().top - window.pageYOffset;
     
     var presets = Paperless.CommentManager.get_preset_comment_html();
+    
+    // handle case where editing an existing comments vs. adding new one
+    var btns = {"Submit": function() { self.save(); }};
+    var aux_action; var aux_text;
+    if(this.text) {
+        btns["Delete"] = function() { self.delete(); }; 
+    } else {
+        btns["Cancel"] = function() { 
+            self.file.remove_dialog();
+            self.file.unhighlight_range(self.range); 
+        }
+    }
 
     // setup the new dialog with the text of the current comement
     current_dialog = $('<div></div>')
@@ -110,10 +117,7 @@ Comment.prototype.edit = function() {
     		focus: true,
     		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide();},
     		closeOnEscape: false,
-    		buttons: { 
-    		   "Submit":  function() { self.save(); }, 
-    		   "Delete":  function() { self.delete(); },
-    		}
+    		buttons: btns
     });
     this.file.current_dialog = current_dialog;
 
@@ -135,8 +139,11 @@ Comment.prototype.ajax = function(action){
 		   },
 		   success: function(response) {
 			    if(response && response.status == "ok"){ 
-			        if(response.action == "create"){
-			            console.info("CREATED A COMMENT!");
+			        if(response.action == "save"){
+			            self.add_to_dom();
+                        if(Comment.is_editing()) {
+                            self.file.remove_dialog();
+                        }
 			        }
 			    } else {
 			        if(response.why){
