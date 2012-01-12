@@ -21,7 +21,8 @@ class Utilities {
 	
 	public static function get_assn_base($qid, $class, $assn){
 		$class_base = Utilities::get_class_base($qid, $class);
-		return $class_base . "/repos/" . $assn;
+		$config = Utilities::get_configuration($qid, $class);
+		return $class_base . "/". $config->submissions_dir ."/" . $assn;
 	}
 	
 	public static function get_student_dir($qid, $class, $assignment, $student){

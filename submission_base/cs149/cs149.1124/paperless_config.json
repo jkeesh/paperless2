@@ -1,7 +1,7 @@
 {
 	"class": "cs107",
 	"tas": ["econner", "jkeeshin"],
-	"submissions_dir": "repos",
+	"submissions_dir": "submissions",
 	"extension_whitelist": ["h", "c"],
 	"assignments": [
 		{
