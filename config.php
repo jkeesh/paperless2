@@ -13,7 +13,7 @@
 
 	if(LOCAL){
 		//This is the only thing you should change	
-		define('USERNAME', 'jkeeshin');
+		define('USERNAME', 'jdoe');
 		
 		define('SUBMISSION_BASE', 'submission_base');
 		define('ROOT_URL', 'http://localhost:8888/paperless2');		

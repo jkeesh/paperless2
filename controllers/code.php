@@ -35,6 +35,13 @@ class CodeHandler extends ToroHandler {
 			}
 		}
 		
+		$interactive = Permissions::is_ta_for_class($qid, $class, USERNAME);
+		if($interactive){
+			$this->smarty->assign("interactive", 'true');
+		}else{
+			$this->smarty->assign("interactive", 'false');
+		}
+		
 		$this->smarty->assign("preset_comments", $preset_comments);
 		
 		// probably change this decomp
