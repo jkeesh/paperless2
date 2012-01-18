@@ -34,6 +34,7 @@ class CodeHandler extends ToroHandler {
 				}
 			}
 		}
+		$this->smarty->assign("preset_comments", $preset_comments);
 		
 		$interactive = Permissions::is_ta_for_class($qid, $class, USERNAME);
 		if($interactive){
@@ -42,7 +43,6 @@ class CodeHandler extends ToroHandler {
 			$this->smarty->assign("interactive", 'false');
 		}
 		
-		$this->smarty->assign("preset_comments", $preset_comments);
 		
 		// probably change this decomp
 		$all_files = Utilities::get_all_files($dirname);
