@@ -11,6 +11,8 @@ Paperless.FileManager = {
     // Hide all files from display
     hide_all_files: function(){
         $('.code_container').hide();
+        
+        $('.filelink a.selected').removeClass('selected');
     },
     
     // Show all of the files 
@@ -22,6 +24,8 @@ Paperless.FileManager = {
     show_file: function(filename){
         Paperless.FileManager.hide_all_files();
         $('.code_container[data-name="'+ filename +'"]').show();
+        
+        $('.filelink a[data-name="'+filename+'"]').addClass('selected');
     },
     
     hide_file: function(filename){
