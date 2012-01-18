@@ -8,6 +8,27 @@ window.D = console;
 Paperless.FileManager = {
     files: [],
     
+    // Hide all files from display
+    hide_all_files: function(){
+        $('.code_container').hide();
+    },
+    
+    // Show all of the files 
+    show_all_files: function(){
+        $('.code_container').show();
+    },
+    
+    
+    show_file: function(filename){
+        Paperless.FileManager.hide_all_files();
+        $('.code_container[data-name="'+ filename +'"]').show();
+    },
+    
+    hide_file: function(filename){
+        $('.code_container[data-name="'+ filename +'"]').hide();
+    },
+    
+    
     // Add a file to the file manager
     add_file: function(file){
         this.files.push(file);
@@ -23,6 +44,11 @@ Paperless.FileManager = {
             }
         }
         return null;
+    },
+    
+    setup: function(){
+        var first_file_name = Paperless.FileManager.files[0].name;
+        Paperless.FileManager.show_file(first_file_name);
     }
 };
 
@@ -92,9 +118,21 @@ Paperless.Setup = {
     create_comments: function(){
         
         $('.filelink').each(function(idx, elem) {
+            
+            var name = $("a", elem).attr('data-name');
+            
+            // Create a new CodeFile object
             var new_file = new CodeFile({
-                name: $("a", elem).attr('data-name')
+                name: name
             });
+            
+            // When you click a link, show this file
+            $("a", elem).click(function(e){
+                e.preventDefault();
+                Paperless.FileManager.show_file(name)
+            })
+            
+            // Add this file to the list of files
             Paperless.FileManager.add_file(new_file);
         });
            
@@ -114,6 +152,8 @@ Paperless.Setup = {
                cur_file.add_comment(new_comment);
            }) ;
         });
+        
+        Paperless.FileManager.setup();
     },
     
     create_preset_comments: function(){
