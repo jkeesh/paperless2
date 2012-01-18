@@ -6,7 +6,9 @@ function CodeFile(options){
     this.current_dialog = null;
     
     // add mouse events
-    this.add_handlers();
+    if(Paperless.CONFIGURATION.interactive){
+        this.add_handlers();
+    }
 }
 
 /*
