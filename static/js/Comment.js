@@ -20,9 +20,12 @@ Comment.prototype.add_to_dom = function() {
     
     var commentLocation = $('.number' + this.range.higher, '.code_container[data-name="' + this.file.name+'"]');
     commentLocation.after(html);
-    html.bind('click', function() {
-        self.edit();
-    });
+    
+    if(Paperless.CONFIGURATION.interactive){
+        html.bind('click', function() {
+            self.edit();
+        });
+    }
 }
 
 /*
