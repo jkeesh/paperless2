@@ -28,6 +28,8 @@ class CodeHandler extends ToroHandler {
 		$preset_comments = array();
 		foreach($config->assignments as $entry){
 			if($entry->dir == $assignment){
+				$this->smarty->assign("assignment", $entry);
+				
 				if(property_exists($entry, 'comments')){
 					$preset_comments = $entry->comments;
 					break;
@@ -42,6 +44,8 @@ class CodeHandler extends ToroHandler {
 		}else{
 			$this->smarty->assign("interactive", 'false');
 		}
+
+		$this->smarty->assign("student", $student);
 		
 		
 		// probably change this decomp
