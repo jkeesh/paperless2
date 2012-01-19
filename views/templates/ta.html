@@ -1,11 +1,11 @@
 {extends file="base.html"} 
 		{block name="content"}
-		<div>
+		<div class="code_title">
 			Assignment Listing for {$class}
 		</div>
 
 		{foreach from=$assns item=assn}
-		<div>
+		<div class="link_list">
 			<a href="assignment/{$assn}">{$assn}</a>
 		</div>
 		{/foreach}

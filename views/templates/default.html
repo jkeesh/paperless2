@@ -1,7 +1,10 @@
 {extends file="base.html"} 
 {block name="content"}
+
+<div id="title" class="code_title">Paperless2</div>
+
 {foreach from=$links item=link key=class}
-<div>
+<div class="link_list">
 	<a href="{$link}">{$class}</a>
 </div>
 {/foreach}
