@@ -1,3 +1,7 @@
+body{
+    font-family: Helvetica;
+}
+
 .hiddenPlainText{
     display: none;
 }
@@ -34,4 +38,28 @@ textarea{
 
 .preset_comment {
     display: none;
+}
+
+.code_title{
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.filelink{
+    margin-right: 10px;
+}
+
+.filelink a{
+    text-decoration: none;
+    color: black;
+    padding: 8px;
+    display: inline-block;
+}
+
+.filelink a.selected{
+    background-color: #fff380;
+}
+
+.filelink a:hover{
+    background-color: #ccc;
 }
