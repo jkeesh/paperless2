@@ -1,6 +1,7 @@
 <?php
+
 	//This is a configuration file for running paperless locally and on web	
-	if(array_key_exists('SERVER_NAME', $_ENV) && $_ENV['SERVER_NAME'] == "www.stanford.edu"){
+	if(array_key_exists('SERVER_NAME', $_ENV) && strpos($_ENV['SERVER_NAME'], "stanford.edu") !== false ){
 		define('LOCAL', false);
 	}else{
 		define('LOCAL', true);
