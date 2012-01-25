@@ -2,7 +2,7 @@
 	"class": "cs107",
 	"tas": ["econner", "jkeeshin"],
 	"submissions_dir": "repos",
-	"extension_whitelist": ["h", "c"],
+	"whitelist": ["\\.c$", "\\.h$", "GRADE"],
 	"assignments": [
 		{
 			"name": "The First Assignment",

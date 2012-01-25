@@ -15,6 +15,7 @@ class Utilities {
 		$config_file = $class_base . "/paperless_config.json";
 		$contents = file_get_contents($config_file);
 		$arr = json_decode($contents);
+		
 		return $arr;
 	}
 	
@@ -107,11 +108,20 @@ class Utilities {
 	 */
 	public static function get_code_files($dirname, $files, $config){
 		$file_info = array();
-		$valid_exts = $config->extension_whitelist;
+		$whitelist_regex = $config->whitelist;
+		
 		foreach($files as $file){
-			$ext = pathinfo($file, PATHINFO_EXTENSION);	
-			if(in_array($ext, $valid_exts)){
-				$file_info[$file] = array('contents' => htmlentities(file_get_contents($dirname . $file)));				
+			$valid = false;
+			foreach($whitelist_regex as $regex){
+				$pattern = "/".$regex."/";
+				if(preg_match($pattern, $file)){
+					$valid = true;
+					break;
+				}
+			}
+			
+			if($valid){
+				$file_info[$file] = array('contents' => htmlentities(file_get_contents($dirname . $file)));	
 			}
 		}
 		return $file_info;
