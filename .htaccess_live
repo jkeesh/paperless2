@@ -5,7 +5,7 @@ Require valid-user
   DirectoryIndex index.php
   RewriteEngine on
 
-  RewriteBase /class/cs198/cgi-bin/paperless2/
+  RewriteBase /group/paperless2/cgi-bin/
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^(.*)$ index.php?path=/$1 [NC,QSA]
