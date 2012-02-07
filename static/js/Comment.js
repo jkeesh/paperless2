@@ -3,6 +3,7 @@ function Comment(options){
     this.commenter = options.commenter;
     this.range = LineRange.string_to_range(options.range_string);
     this.file = options.file;
+    this.waiting_on_request = false;
 }
 
 /*
@@ -130,6 +131,9 @@ Comment.prototype.edit = function() {
 
 Comment.prototype.ajax = function(action){
     var self = this;
+    if(self.waiting_on_request) return;
+    
+    self.waiting_on_request = true;
 	$.ajax({
 		   type: 'POST',
 		   url: window.location.pathname, // post to current location url
@@ -141,6 +145,7 @@ Comment.prototype.ajax = function(action){
 		       filename: this.file.name,
 		   },
 		   success: function(response) {
+		        self.waiting_on_request = false;
 			    if(response && response.status == "ok"){ 
 			        if(response.action == "save"){
 			            self.add_to_dom();
