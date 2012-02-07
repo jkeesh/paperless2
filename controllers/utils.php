@@ -10,6 +10,15 @@ class Utilities {
 		return $class_base;
 	}
 	
+	
+	public function get_sunetid($student){
+		if(strpos($student, '-') != FALSE){
+			$arr = explode('-', $student);
+			return $arr[0];
+		}
+		return $student;
+	}
+	
 	public static function get_configuration($qid, $class){
 		$class_base = Utilities::get_class_base($qid, $class);
 		$config_file = $class_base . "/paperless_config.json";

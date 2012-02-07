@@ -1,8 +1,8 @@
 {
 	"class": "cs107",
-	"tas": ["econner", "jkeeshin"],
+	"tas": ["jkeeshin"],
 	"submissions_dir": "submissions",
-	"extension_whitelist": ["h", "c"],
+	"whitelist": ["\\.c$", "\\.h$", "\\.java$", "\\.txt"],
 	"assignments": [
 		{
 			"name": "The First Assignment",

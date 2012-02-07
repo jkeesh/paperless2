@@ -6,6 +6,8 @@ class CodeHandler extends ToroHandler {
 		$this->smarty->assign('errorMsg', $error);
 		$this->smarty->display('error.html');
 	}
+	
+
 
 	/*
 	 * Displays the syntax highlighted code for a student, assignment pair
@@ -14,7 +16,9 @@ class CodeHandler extends ToroHandler {
 	 * Test URL: http://localhost:8888/paperless2/1122/cs107/code/assign1/econner
 	 */
 	public function get($qid, $class, $assignment, $student, $print=False) {
-		if($student != USERNAME){
+		$sunetid = Utilities::get_sunetid($student);
+		
+		if($sunetid != USERNAME){
 			Permissions::TA_GATE($qid, $class, USERNAME);
 		}
 		$this->basic_setup();
