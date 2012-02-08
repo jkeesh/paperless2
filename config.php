@@ -1,7 +1,7 @@
 <?php
 
 	//This is a configuration file for running paperless locally and on web	
-	if(array_key_exists('SERVER_NAME', $_ENV) && strpos($_ENV['SERVER_NAME'], "stanford.edu") !== false ){
+	if(array_key_exists('WEBAUTH_USER', $_ENV)){
 		define('LOCAL', false);
 	}else{
 		define('LOCAL', true);
