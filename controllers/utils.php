@@ -3,10 +3,12 @@ class Utilities {
 	
 	/*
 	 * Get the class base dir, which is: 
-	 * SUBMISSION_BASE/cs107/cs107.1122
+	 * SUBMISSION_BASE/cs/cs107/cs107.1122
 	 */
 	public static function get_class_base($qid, $class){
-		$class_base = SUBMISSION_BASE . "/". $class. "/". $class . "." . $qid;
+		$arr = preg_split('/[0-9]+/', $class);
+		$subject = $arr[0];
+		$class_base = SUBMISSION_BASE . "/". $subject . "/". $class. "/". $class . "." . $qid;
 		return $class_base;
 	}
 	

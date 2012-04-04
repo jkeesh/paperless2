@@ -23,8 +23,9 @@
 		$sunetid = $_ENV['WEBAUTH_USER'];
         $username = strtolower($sunetid);
 		define('USERNAME', $username);
-		
-		define('SUBMISSION_BASE', '/afs/ir/class/archive/cs');	
+
+		define('SUBMISSION_BASE', '/afs/ir/class/archive');			
+//		define('SUBMISSION_BASE', '/afs/ir/class/archive/cs');	
 //		define('ROOT_URL', 'https://www.stanford.edu/class/cs198/cgi-bin/paperless2');
 //		define('ROOT_URL', 'https://www.stanford.edu/group/paperless2/cgi-bin');
 		define('ROOT_URL', 'https://paperless2.stanford.edu');
