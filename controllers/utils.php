@@ -5,6 +5,7 @@ class Utilities {
 	 * Get the class base dir, which is: 
 	 * SUBMISSION_BASE/cs/cs107/cs107.1122
 	 *
+	 *
 	 */
 	public static function get_class_base($qid, $class){
 		$arr = preg_split('/[0-9]+/', $class);
